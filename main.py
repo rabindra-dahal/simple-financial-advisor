@@ -5,7 +5,7 @@ load_dotenv()
 
 from fastapi import FastAPI
 # Import your new anomalies router module
-from routers import customers, transactions, analytics, advisor, anomalies 
+from routers import customers, transactions, analytics, advisor, anomalies, auth 
 from core.vector_db import index_transactions_to_vector_store
 
 @asynccontextmanager
@@ -19,6 +19,7 @@ app = FastAPI(
     lifespan=lifespan
 )
 
+app.include_router(auth.router) # Register authentication logic path
 app.include_router(customers.router)
 app.include_router(transactions.router)
 app.include_router(analytics.router)

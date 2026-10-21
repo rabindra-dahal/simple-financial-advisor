@@ -66,3 +66,12 @@ class AIAnomalyAlert(BaseModel):
     ai_warning_message: str
     engine_used: str
 
+# Add at the bottom of core/schemas.py
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+class TokenData(BaseModel):
+    email: str | None = None
+

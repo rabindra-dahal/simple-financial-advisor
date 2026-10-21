@@ -1,12 +1,14 @@
-import math
 import logging
-from fastapi import APIRouter, HTTPException
+import math
+from fastapi import APIRouter, HTTPException, Depends
 from google import genai
 import ollama
 
-from core.schemas import AnomalyReport, FlaggedAnomaly, AIAnomalyAlert
+from core.schemas import AnomalyReport, FlaggedAnomaly, AIAnomalyAlert, Customer
 from core.database import transactions_db, customers_db
+from core.auth import get_current_user  # Import our security dependency
 
+# Setup dedicated engine console logger
 logger = logging.getLogger("api_anomalies")
 logging.basicConfig(level=logging.INFO)
 
@@ -15,6 +17,7 @@ router = APIRouter(
     tags=["Fraud & Anomalies"]
 )
 
+# Initialize primary Gemini client safely
 try:
     gemini_client = genai.Client()
 except Exception:
@@ -32,14 +35,20 @@ def calculate_mean_and_stdev(amounts: list[float]):
     if n < 2:
         return mean, 0.0  # Cannot compute variance with less than 2 items
         
-    # Variance computation
     variance = sum((x - mean) ** 2 for x in amounts) / n
     return mean, math.sqrt(variance)
 
 
-# --- 1. GET ROUTE: DYNAMIC Z-SCORE DETECTOR ---
+# --- 1. GET ROUTE: DYNAMIC Z-SCORE DETECTOR (SECURED) ---
 @router.get("/customer/{customer_id}", response_model=AnomalyReport)
-def detect_spending_anomalies(customer_id: int):
+def detect_spending_anomalies(customer_id: int, current_user: Customer = Depends(get_current_user)):
+    # 🔒 CROSS-TENANT SECURITY CHECK: Prevent users from sniffing other accounts
+    if current_user.id != customer_id:
+        raise HTTPException(
+            status_code=403, 
+            detail="Forbidden: You are not authorized to view this customer's anomaly reports."
+        )
+
     customer_exists = any(c.id == customer_id for c in customers_db)
     if not customer_exists:
         raise HTTPException(status_code=404, detail="Customer not found")
@@ -73,13 +82,11 @@ def detect_spending_anomalies(customer_id: int):
         mean = stats["mean"]
         stdev = stats["stdev"]
         
-        # Calculate Z-Score: (Value - Mean) / Standard Deviation
-        # If stdev is 0 (all values identical), the Z-Score is 0
+        # Calculate Z-Score
         z_score = (actual_cost - mean) / stdev if stdev > 0 else 0.0
         
-        # STATISTICAL ANOMALY RULE: Flag if the transaction is over 1.5 standard deviations above average (Z-Score > 1.5)
-        # AND check that it's an outright increase (not a cheaper-than-normal transaction)
-        # AND has a minimum absolute visual threshold impact of over $40.00
+        # Flag if transaction is >= 1.0 standard deviations away, 
+        # is an increase, and is above a minimum threshold of $5.00
         if z_score >= 1.0 and actual_cost > mean and actual_cost > 5.0:
             reason_msg = (
                 f"This transaction has a Z-Score of {z_score:.2f}, meaning it deviates significantly "
@@ -94,7 +101,7 @@ def detect_spending_anomalies(customer_id: int):
                     category=tx.category,
                     transaction_date=tx.transaction_date,
                     average_category_spending=round(mean, 2),
-                    deviation_multiplier=round(z_score, 2), # Passing Z-score as the multiplier metric
+                    deviation_multiplier=round(z_score, 2),
                     reason=reason_msg
                 )
             )
@@ -106,16 +113,21 @@ def detect_spending_anomalies(customer_id: int):
     )
 
 
-# --- 2. POST ROUTE: AI SMART PROMPT GENERATOR ---
+# --- 2. POST ROUTE: AI SMART PROMPT GENERATOR (SECURED) ---
 @router.post("/customer/{customer_id}/ai-warning", response_model=AIAnomalyAlert)
-def generate_ai_anomaly_warning(customer_id: int):
-    anomaly_report = detect_spending_anomalies(customer_id=customer_id)
+def generate_ai_anomaly_warning(customer_id: int, current_user: Customer = Depends(get_current_user)):
+    # 🔒 CROSS-TENANT SECURITY CHECK
+    if current_user.id != customer_id:
+        raise HTTPException(
+            status_code=403, 
+            detail="Forbidden: You are not authorized to trigger alerts for this customer."
+        )
+
+    # Note: detect_spending_anomalies internally requires token verification too, 
+    # but since we pass dependencies explicitly, we can call the python logic directly here.
+    anomaly_report = detect_spending_anomalies(customer_id=customer_id, current_user=current_user)
     
-    customer_name = "Valued Customer"
-    for c in customers_db:
-        if c.id == customer_id:
-            customer_name = c.name
-            break
+    customer_name = current_user.name
 
     if not anomaly_report.anomalies_found:
         return AIAnomalyAlert(
@@ -143,7 +155,7 @@ def generate_ai_anomaly_warning(customer_id: int):
         f"Instructions:\n"
         f"- Greet the customer warmly by their first name ({customer_name.split()[0]}).\n"
         f"- Explain the anomaly clearly using the provided data points without sounding alarmist.\n"
-        f"- Do not use technical statistics terms like 'Z-Score' or 'Standard Deviation' in the final response. Translate them into plain language (e.g., 'way higher than your typical range').\n"
+        f"- Do not use technical statistics terms like 'Z-Score' or 'Standard Deviation' in the final response. Translate them into plain language.\n"
         f"- Keep the message clean, under 4 sentences, and avoid raw markdown tags."
     )
 
@@ -178,6 +190,7 @@ def generate_ai_anomaly_warning(customer_id: int):
             engine_used="ollama-llama3 (local fallback)"
         )
     except Exception as ollama_err:
+        logger.error(f"Both core AI engines failed compilation pipelines: {str(ollama_err)}")
         raise HTTPException(
             status_code=503,
             detail=f"Financial Notification System failure. Error trace: {str(ollama_err)}"
