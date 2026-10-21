@@ -3,6 +3,10 @@ __pycache__/
 *.py[codz]
 *$py.class
 .env
+core/data/chroma_db
+core/data/chroma_db/**
+**/core/data/chroma_db/**
+
 
 
 # C extensions
