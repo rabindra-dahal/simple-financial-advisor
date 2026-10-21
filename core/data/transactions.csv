@@ -1,0 +1,201 @@
+id,customer_id,title,amount,category,transaction_date,is_completed
+1,1,Dividend Payout,66.7,Income,2026-10-01,True
+2,1,Dividend Payout,113.29,Income,2026-10-02,True
+3,1,Salary Deposit,3081.65,Income,2026-10-02,True
+4,1,Movie Tickets,-26.12,Entertainment,2026-10-06,True
+5,1,Movie Tickets,-28.51,Entertainment,2026-10-06,True
+6,1,Gas Station Fill-up,-60.35,Transport,2026-10-07,True
+7,1,Monthly Apartment Rent,-1114.45,Rent,2026-10-10,True
+8,1,Trader Joe's,-48.18,Groceries,2026-10-14,True
+9,1,Netflix Subscription,-19.74,Entertainment,2026-10-19,True
+10,1,Electric Bill,-117.28,Utilities,2026-10-19,True
+11,2,Salary Deposit,3397.45,Income,2026-10-01,True
+12,2,Sushi Restaurant,-76.45,Dining,2026-10-03,True
+13,2,Electric Bill,-116.37,Utilities,2026-10-03,True
+14,2,Netflix Subscription,-20.41,Entertainment,2026-10-04,True
+15,2,Concert Performance,-137.76,Entertainment,2026-10-07,True
+16,2,Costco Wholesale,-261.27,Groceries,2026-10-09,True
+17,2,Trader Joe's,-79.35,Groceries,2026-10-10,True
+18,2,Gas Station Fill-up,-62.77,Transport,2026-10-11,True
+19,2,Monthly Apartment Rent,-820.76,Rent,2026-10-12,True
+20,2,Netflix Subscription,-19.98,Entertainment,2026-10-13,True
+21,3,Salary Deposit,4095.32,Income,2026-10-01,True
+22,3,Trader Joe's,-66.19,Groceries,2026-10-03,True
+23,3,Internet & Cable Bill,-91.56,Utilities,2026-10-06,True
+24,3,Monthly Apartment Rent,-855.99,Rent,2026-10-10,True
+25,3,Movie Tickets,-32.61,Entertainment,2026-10-11,True
+26,3,Internet & Cable Bill,-107.03,Utilities,2026-10-14,True
+27,3,Freelance Project,368.51,Income,2026-10-15,True
+28,3,Public Transit Pass,-84.28,Transport,2026-10-18,True
+29,3,Electric Bill,-132.81,Utilities,2026-10-19,True
+30,3,Sushi Restaurant,-91.22,Dining,2026-10-20,True
+31,4,Salary Deposit,3471.18,Income,2026-10-01,True
+32,4,Starbucks Coffee,-5.45,Dining,2026-10-05,True
+33,4,Concert Performance,-165.74,Entertainment,2026-10-06,True
+34,4,Public Transit Pass,-74.39,Transport,2026-10-07,True
+35,4,Trader Joe's,-99.27,Groceries,2026-10-08,True
+36,4,Internet & Cable Bill,-92.36,Utilities,2026-10-11,True
+37,4,Trader Joe's,-112.56,Groceries,2026-10-13,True
+38,4,Monthly Apartment Rent,-1401.59,Rent,2026-10-15,True
+39,4,Uber Ride,-43.83,Transport,2026-10-16,True
+40,4,Netflix Subscription,-16.14,Entertainment,2026-10-18,True
+41,5,Salary Deposit,4095.42,Income,2026-10-01,True
+42,5,Whole Foods Market,-107.56,Groceries,2026-10-04,True
+43,5,Whole Foods Market,-112.55,Groceries,2026-10-07,True
+44,5,Monthly Apartment Rent,-828.61,Rent,2026-10-07,True
+45,5,Uber Ride,-18.42,Transport,2026-10-13,True
+46,5,Trader Joe's,-51.13,Groceries,2026-10-14,True
+47,5,Costco Wholesale,-213.98,Groceries,2026-10-14,True
+48,5,Gas Station Fill-up,-53.48,Transport,2026-10-16,True
+49,5,Starbucks Coffee,-9.56,Dining,2026-10-18,True
+50,5,Netflix Subscription,-20.59,Entertainment,2026-10-20,True
+51,6,Salary Deposit,4481.56,Income,2026-10-01,True
+52,6,Local Pizzeria Dine-in,-47.01,Dining,2026-10-02,True
+53,6,Gas Station Fill-up,-51.05,Transport,2026-10-03,True
+54,6,Internet & Cable Bill,-96.79,Utilities,2026-10-06,True
+55,6,Monthly Apartment Rent,-1326.69,Rent,2026-10-08,True
+56,6,Trader Joe's,-97.31,Groceries,2026-10-08,True
+57,6,Netflix Subscription,-21.73,Entertainment,2026-10-13,True
+58,6,Concert Performance,-156.44,Entertainment,2026-10-13,True
+59,6,City Water Utility,-31.06,Utilities,2026-10-16,True
+60,6,Local Pizzeria Dine-in,-27.81,Dining,2026-10-17,True
+61,7,Salary Deposit,3681.44,Income,2026-10-01,True
+62,7,Monthly Apartment Rent,-1351.64,Rent,2026-10-03,True
+63,7,Local Pizzeria Dine-in,-26.79,Dining,2026-10-04,True
+64,7,Internet & Cable Bill,-94.63,Utilities,2026-10-05,True
+65,7,Concert Performance,-90.04,Entertainment,2026-10-06,True
+66,7,Starbucks Coffee,-14.28,Dining,2026-10-07,True
+67,7,Electric Bill,-132.82,Utilities,2026-10-08,True
+68,7,Uber Ride,-44.38,Transport,2026-10-09,True
+69,7,Costco Wholesale,-200.73,Groceries,2026-10-14,True
+70,7,Dividend Payout,197.87,Income,2026-10-16,True
+71,8,Salary Deposit,3883.33,Income,2026-10-01,True
+72,8,City Water Utility,-31.28,Utilities,2026-10-03,True
+73,8,Whole Foods Market,-123.63,Groceries,2026-10-03,True
+74,8,Costco Wholesale,-317.02,Groceries,2026-10-10,True
+75,8,Sushi Restaurant,-82.68,Dining,2026-10-14,True
+76,8,Internet & Cable Bill,-86.37,Utilities,2026-10-15,True
+77,8,Monthly Apartment Rent,-886.72,Rent,2026-10-16,True
+78,8,Gas Station Fill-up,-59.61,Transport,2026-10-16,True
+79,8,Sushi Restaurant,-99.4,Dining,2026-10-19,True
+80,8,Electric Bill,-99.78,Utilities,2026-10-20,True
+81,9,Salary Deposit,4093.53,Income,2026-10-01,True
+82,9,Costco Wholesale,-342.37,Groceries,2026-10-04,True
+83,9,Gas Station Fill-up,-56.32,Transport,2026-10-05,True
+84,9,Uber Ride,-20.47,Transport,2026-10-11,True
+85,9,Trader Joe's,-74.37,Groceries,2026-10-12,True
+86,9,Concert Performance,-137.98,Entertainment,2026-10-13,True
+87,9,Monthly Apartment Rent,-823.11,Rent,2026-10-14,True
+88,9,Gas Station Fill-up,-44.97,Transport,2026-10-16,True
+89,9,Movie Tickets,-43.34,Entertainment,2026-10-17,True
+90,9,Monthly Apartment Rent,-1207.28,Rent,2026-10-19,True
+91,10,Dividend Payout,137.75,Income,2026-10-01,True
+92,10,Whole Foods Market,-140.75,Groceries,2026-10-02,True
+93,10,Uber Ride,-31.62,Transport,2026-10-05,True
+94,10,Netflix Subscription,-16.66,Entertainment,2026-10-07,True
+95,10,Freelance Project,899.64,Income,2026-10-10,True
+96,10,Starbucks Coffee,-9.88,Dining,2026-10-11,True
+97,10,Starbucks Coffee,-9.21,Dining,2026-10-12,True
+98,10,Electric Bill,-94.61,Utilities,2026-10-13,True
+99,10,Gas Station Fill-up,-62.14,Transport,2026-10-16,True
+100,10,Electric Bill,-130.68,Utilities,2026-10-19,True
+101,11,Freelance Project,1181.71,Income,2026-10-01,True
+102,11,Internet & Cable Bill,-82.72,Utilities,2026-10-04,True
+103,11,Electric Bill,-74.07,Utilities,2026-10-07,True
+104,11,Local Pizzeria Dine-in,-42.27,Dining,2026-10-11,True
+105,11,Whole Foods Market,-128.52,Groceries,2026-10-13,True
+106,11,Internet & Cable Bill,-83.56,Utilities,2026-10-15,True
+107,11,Sushi Restaurant,-91.31,Dining,2026-10-16,True
+108,11,Concert Performance,-141.01,Entertainment,2026-10-17,True
+109,11,Gas Station Fill-up,-51.13,Transport,2026-10-17,True
+110,11,Uber Ride,-44.11,Transport,2026-10-20,True
+111,12,Salary Deposit,3652.88,Income,2026-10-01,True
+112,12,Electric Bill,-126.96,Utilities,2026-10-02,True
+113,12,Starbucks Coffee,-12.22,Dining,2026-10-03,True
+114,12,Public Transit Pass,-82.72,Transport,2026-10-07,True
+115,12,Trader Joe's,-94.67,Groceries,2026-10-08,True
+116,12,Trader Joe's,-91.13,Groceries,2026-10-10,True
+117,12,Whole Foods Market,-125.64,Groceries,2026-10-14,True
+118,12,Costco Wholesale,-273.74,Groceries,2026-10-14,True
+119,12,Monthly Apartment Rent,-800.74,Rent,2026-10-15,True
+120,12,Movie Tickets,-26.47,Entertainment,2026-10-18,True
+121,13,Salary Deposit,3925.32,Income,2026-10-01,True
+122,13,Trader Joe's,-60.05,Groceries,2026-10-02,True
+123,13,City Water Utility,-31.62,Utilities,2026-10-03,True
+124,13,Electric Bill,-93.68,Utilities,2026-10-04,True
+125,13,Whole Foods Market,-109.84,Groceries,2026-10-07,True
+126,13,Trader Joe's,-87.41,Groceries,2026-10-09,True
+127,13,Uber Ride,-30.04,Transport,2026-10-12,True
+128,13,Electric Bill,-64.44,Utilities,2026-10-14,True
+129,13,Movie Tickets,-34.25,Entertainment,2026-10-17,True
+130,13,Netflix Subscription,-21.84,Entertainment,2026-10-18,True
+131,14,Salary Deposit,3681.33,Income,2026-10-01,True
+132,14,Monthly Apartment Rent,-1238.11,Rent,2026-10-03,True
+133,14,Local Pizzeria Dine-in,-31.62,Dining,2026-10-03,True
+134,14,Internet & Cable Bill,-83.56,Utilities,2026-10-04,True
+135,14,Monthly Apartment Rent,-841.67,Rent,2026-10-04,True
+136,14,Netflix Subscription,-19.41,Entertainment,2026-10-05,True
+137,14,Movie Tickets,-40.54,Entertainment,2026-10-10,True
+138,14,Netflix Subscription,-20.67,Entertainment,2026-10-14,True
+139,14,Gas Station Fill-up,-51.13,Transport,2026-10-15,True
+140,14,Movie Tickets,-43.68,Entertainment,2026-10-18,True
+141,15,Salary Deposit,4481.56,Income,2026-10-01,True
+142,15,Whole Foods Market,-137.28,Groceries,2026-10-02,True
+143,15,Netflix Subscription,-21.41,Entertainment,2026-10-04,True
+144,15,Monthly Apartment Rent,-1481.33,Rent,2026-10-05,True
+145,15,Electric Bill,-91.56,Utilities,2026-10-06,True
+146,15,City Water Utility,-31.62,Utilities,2026-10-13,True
+147,15,Trader Joe's,-107.03,Groceries,2026-10-14,True
+148,15,Whole Foods Market,-141.01,Groceries,2026-10-15,True
+149,15,Electric Bill,-132.81,Utilities,2026-10-18,True
+150,15,Uber Ride,-44.11,Transport,2026-10-20,True
+151,16,Salary Deposit,3681.44,Income,2026-10-01,True
+152,16,Uber Ride,-31.62,Transport,2026-10-03,True
+153,16,Public Transit Pass,-83.56,Transport,2026-10-04,True
+154,16,Internet & Cable Bill,-84.17,Utilities,2026-10-06,True
+155,16,Starbucks Coffee,-9.41,Dining,2026-10-10,True
+156,16,Concert Performance,-140.54,Entertainment,2026-10-14,True
+157,16,Public Transit Pass,-70.67,Transport,2026-10-15,True
+158,16,Local Pizzeria Dine-in,-51.13,Dining,2026-10-18,True
+159,16,Starbucks Coffee,-13.68,Dining,2026-10-19,True
+160,16,Internet & Cable Bill,-107.03,Utilities,2026-10-20,True
+161,17,Salary Deposit,3883.33,Income,2026-10-01,True
+162,17,Local Pizzeria Dine-in,-31.62,Dining,2026-10-03,True
+163,17,Internet & Cable Bill,-83.56,Utilities,2026-10-04,True
+164,17,Internet & Cable Bill,-84.17,Utilities,2026-10-06,True
+165,17,Netflix Subscription,-19.41,Entertainment,2026-10-10,True
+166,17,Movie Tickets,-40.54,Entertainment,2026-10-14,True
+167,17,Costco Wholesale,-270.67,Groceries,2026-10-15,True
+168,17,Electric Bill,-111.33,Utilities,2026-10-18,True
+169,17,Starbucks Coffee,-13.68,Dining,2026-10-19,True
+170,17,Internet & Cable Bill,-107.03,Utilities,2026-10-20,True
+171,18,Salary Deposit,4093.53,Income,2026-10-01,True
+172,18,Uber Ride,-31.62,Transport,2026-10-03,True
+173,18,Public Transit Pass,-83.56,Transport,2026-10-04,True
+174,18,Internet & Cable Bill,-84.17,Utilities,2026-10-06,True
+175,18,Netflix Subscription,-19.41,Entertainment,2026-10-10,True
+176,18,Movie Tickets,-40.54,Entertainment,2026-10-14,True
+177,18,Whole Foods Market,-170.67,Groceries,2026-10-15,True
+178,18,Sushi Restaurant,-111.33,Dining,2026-10-18,True
+179,18,Starbucks Coffee,-13.68,Dining,2026-10-19,True
+180,18,Internet & Cable Bill,-107.03,Utilities,2026-10-20,True
+181,19,Salary Deposit,4481.56,Income,2026-10-01,True
+182,19,Monthly Apartment Rent,-1431.62,Rent,2026-10-03,True
+183,19,Concert Performance,-83.56,Entertainment,2026-10-04,True
+184,19,Costco Wholesale,-284.17,Groceries,2026-10-06,True
+185,19,Trader Joe's,-119.41,Groceries,2026-10-10,True
+186,19,Starbucks Coffee,-10.79,Dining,2026-10-11,True
+187,19,Public Transit Pass,-81.31,Transport,2026-10-13,True
+188,19,Uber Ride,-18.17,Transport,2026-10-13,True
+189,19,Internet & Cable Bill,-115.4,Utilities,2026-10-14,True
+190,19,Internet & Cable Bill,-87.06,Utilities,2026-10-15,True
+191,20,Dividend Payout,183.74,Income,2026-10-01,True
+192,20,Local Pizzeria Dine-in,-54.81,Dining,2026-10-04,True
+193,20,Freelance Project,1065.86,Income,2026-10-07,True
+194,20,Monthly Apartment Rent,-1048.38,Rent,2026-10-10,True
+195,20,Local Pizzeria Dine-in,-55.81,Dining,2026-10-10,True
+196,20,Internet & Cable Bill,-103.41,Utilities,2026-10-12,True
+197,20,Local Pizzeria Dine-in,-33.54,Dining,2026-10-16,True
+198,20,Monthly Apartment Rent,-1104.84,Rent,2026-10-18,True
+199,20,Movie Tickets,-35.4,Entertainment,2026-10-19,True
+200,20,Uber Ride,-28.95,Transport,2026-10-20,True
