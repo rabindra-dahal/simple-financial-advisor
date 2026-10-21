@@ -58,4 +58,11 @@ class AnomalyReport(BaseModel):
     total_transactions_analyzed: int
     anomalies_found: list[FlaggedAnomaly]
 
+# Add at the bottom of core/schemas.py
+
+class AIAnomalyAlert(BaseModel):
+    customer_id: int
+    anomalies_detected: int
+    ai_warning_message: str
+    engine_used: str
 
