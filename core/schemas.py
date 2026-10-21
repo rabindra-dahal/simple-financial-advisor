@@ -41,3 +41,21 @@ class CustomerAnalytics(BaseModel):
     net_balance: float
     spending_by_category: list[CategoryBreakdown]
 
+# Add at the bottom of core/schemas.py
+
+class FlaggedAnomaly(BaseModel):
+    transaction_id: int
+    title: str
+    amount: float
+    category: str
+    transaction_date: date
+    average_category_spending: float
+    deviation_multiplier: float  # How many times higher than average this is
+    reason: str
+
+class AnomalyReport(BaseModel):
+    customer_id: int
+    total_transactions_analyzed: int
+    anomalies_found: list[FlaggedAnomaly]
+
+
