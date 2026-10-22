@@ -4,8 +4,8 @@ from pydantic import BaseModel, Field
 
 # --- CUSTOMER SCHEMAS ---
 class CustomerBase(BaseModel):
-    name: str = Field(..., example="Alice Smith")
-    email: str = Field(..., example="alice@example.com")
+    name: str = Field(..., json_schema_extra="Alice Smith")
+    email: str = Field(..., json_schema_extra="alice@example.com")
 
 class CustomerCreate(CustomerBase):
     pass
@@ -15,9 +15,9 @@ class Customer(CustomerBase):
 
 # --- TRANSACTION SCHEMAS ---
 class TransactionBase(BaseModel):
-    title: str = Field(..., example="Coffee Shop")
+    title: str = Field(..., json_schema_extra="Coffee Shop")
     amount: float = Field(..., description="Positive for income, negative for expense")
-    category: str = Field(..., example="Food & Dining")
+    category: str = Field(..., json_schema_extra="Food & Dining")
     transaction_date: date = Field(default_factory=date.today)
     is_completed: bool = True
 
