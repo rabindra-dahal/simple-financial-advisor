@@ -1,12 +1,12 @@
 # 🪙 Secure AI Financial Advisor & Anomaly Detector
 
-A modular, production-ready **Fintech REST API & Interactive Dashboard** built using **Python, FastAPI, Streamlit, and ChromaDB**. This application leverages **Gemini 3.5 Flash-Lite** as a primary RAG engine to deliver context-aware financial advisory chats and conversational fraud/anomaly alerts, backed by a local **Ollama (Llama3)** failover mechanism.
+A modular, production-ready **Fintech REST API & Interactive Dashboard** built using **Python, FastAPI, Streamlit, and ChromaDB**. This application features dynamic **Z-Score statistical anomaly tracking**, secure **OAuth2 JWT token-based authentication**, and an advanced **Multi-Turn Chat Advisor** powered by **Gemini 3.5 Flash-Lite** with a local **Ollama (Llama3)** failover mechanism.
 
 ---
 
 ## 🏗️ Project Architecture & Layout
 
-The project separates core data loading, vector indexing, and business logic from the routing and representation layers:
+The project separates core configurations, secure authorization dependencies, and analytical parsing logic from presentation containers and testing suites:
 
 ```text
 simple-financial-advisor/
@@ -22,16 +22,24 @@ simple-financial-advisor/
 │   └── vector_db.py          # ChromaDB connection & SentenceTransformers embedder
 │
 ├── routers/
-│   ├── advisor.py            # Core RAG Advisor chat prompt engine (Gemini/Ollama)
+│   ├── advisor.py            # Stateful multi-turn conversational RAG advisor engine
 │   ├── anomalies.py          # Statistical Z-Score abnormality detector & AI generator
 │   ├── analytics.py          # Categorized ledger metrics aggregator
 │   ├── auth.py               # Credentials authentication gateway & JWT token provider
 │   ├── customers.py          # Customer profile registry endpoints
 │   └── transactions.py       # Financial ledger statement endpoints
 │
+├── tests/
+│   ├── __init__.py           # Declares directory as a Python testing package
+│   ├── conftest.py          # Configures global environment mocks & isolated DB fixtures
+│   ├── test_anomalies.py    # Validates Z-Score math thresholds & Ollama failovers
+│   └── test_auth.py         # Validates JWT tokens & cross-tenant security guardrails
+│
 ├── .env                      # Secure private keys & configurations (git-ignored)
-├── app.py                    # Streamlit responsive multi-tab frontend interface
+├── .session_cache.json       # Secure disk-persisted session data & conversation threads
+├── app.py                    # Streamlit interface with Google AI Studio styling
 ├── main.py                   # FastAPI core entry point & lifespan scheduler
+├── pytest.ini                # Sanitized automated test filtering rules
 └── requirements.txt          # Python dependency checklist
 ```
 
@@ -39,12 +47,15 @@ simple-financial-advisor/
 
 ## ✨ Features Accomplished
 
-1. **Modular Architecture:** Complete isolation of concerns between layout directories (`core/`), routing clusters (`routers/`), app configurations, and client presentation layers.
+1. **Modular Architecture:** Complete isolation of concerns between layout directories (`core/`), routing clusters (`routers/`), test workspaces (`tests/`), app configurations, and client presentation layers.
 2. **Stateless CSV Ingestion:** Clean parsing engine that extracts, maps, and loads plain text files into active operational dictionary memories at server bootstrap.
-3. **Statistical Anomaly Monitoring:** Real-time Z-Score engine computing personal standard deviations per category. Flags spending irregularities exceeding 1.0σ dynamically.
-4. **Resilient AI Pipeline (Dual Engine):** Advanced prompting that attempts token evaluation using **Gemini 3.5 Flash-Lite** first and gracefully slips down into **Ollama (Llama3)** locally during API outages.
-5. **Secure Token Locking (JWT):** Full implementation of OAuth2 password request protocols issuing secure, time-locked (`30m`) signed keys protecting downstream endpoints from unauthorized access.
-6. **Polished Dashboard Frontend:** Responsive Streamlit tabs rendering interactive transaction dataframes, balance summary cards, alert logs, and contextual chat boxes without escape sequence string leaks.
+3. **Statistical Anomaly Monitoring:** Dynamic Z-Score engine computing personal standard deviations per category. Flags spending irregularities exceeding 1.0σ dynamically.
+4. **Stateful Conversation Threads:** The AI Advisor maintains session memory (`chat_history_db`), allowing customers to ask contextual follow-up questions (e.g., *"How much did I spend on tickets?"* followed by *"Was that above my average?"*).
+5. **Precision Output Formatting:** Strict system rules that force the AI to return currency tags wrapped in `USD` or text descriptors, preventing formatting glitches or whitespace compression under Streamlit's Markdown/LaTeX parser engines.
+6. **Bulletproof Session Permanence:** Self-contained file-backed cache layer (`.session_cache.json`) that saves tokens and conversational logs onto disk. Eliminates data wipeouts and forces persistent sign-ins even on browser **F5** refreshes.
+7. **Resilient AI Pipeline (Dual Engine):** Advanced prompting that evaluates queries using **Gemini 3.5 Flash-Lite** first and gracefully slips down into a local **Ollama (Llama3)** container during API outages.
+8. **Premium Dashboard UI Design:** Centered bottom-anchored chat input elements mirroring **Google AI Studio** with manual conversation flushing buttons built cleanly into the grid viewport.
+9. **Pristine Test Suite Configuration:** High-precision mock unit test pipelines isolated inside `tests/` with optimized regex configuration rules silencing third-party warning alerts during automated verification cycles.
 
 ---
 
@@ -58,11 +69,11 @@ Ensure you have **Python 3.10+** installed on your workstation machine:
 cd simple-financial-advisor
 
 # Initialize virtual environment containers
-python -m venv .venv
-source .venv/bin/activate  # Windows user: .venv\Scripts\activate
+python -m venv venv
+source venv/Scripts/activate  # macOS/Linux user: source venv/bin/activate
 
 # Install required system packages
-pip install fastapi[standard] streamlit requests pyjwt[crypto] passlib[bcrypt] google-genai chromadb sentence-transformers ollama python-dotenv
+pip install fastapi[standard] streamlit requests pyjwt[crypto] passlib[bcrypt] google-genai chromadb sentence-transformers ollama python-dotenv pytest httpx pytest-mock
 ```
 
 ### 2. Configure Local Secrets (`.env`)
@@ -70,9 +81,10 @@ Create a `.env` file in the root directory:
 
 ```env
 GEMINI_API_KEY=your_actual_google_gemini_api_key_here
-JWT_SECRET=supersecretfintechkey12345!
+JWT_SECRET=supersecretfintechkey12345!productionsecured32bytes
 JWT_ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=30
+HF_HUB_DISABLE_SYMLINKS_WARNING=1
 ```
 
 ### 3. Start Local Fallback Models (Optional)
@@ -89,8 +101,9 @@ ollama run llama3
 You must execute the application inside two separate parallel terminal tabs or split-window shell sessions:
 
 ### Terminal 1: Launch FastAPI Backend Server
+To make the watcher track changes only inside your python code files and ignore frontend logs:
 ```bash
-fastapi dev main.py
+fastapi dev main.py --reload-dir core --reload-dir routers
 ```
 * Interactive Swagger UI documentation pages compile directly at `http://127.0.0`.
 
@@ -100,20 +113,19 @@ streamlit run app.py
 ```
 * The user dashboard interface opens automatically inside your favorite default browser environment at `http://localhost:8501`.
 
+### Running Automated Test Infrastructure
+To execute your mathematical verification rules and endpoint access barriers securely without exhausting real live API tokens:
+```bash
+pytest -v
+```
+
 ---
 
 ## 🧪 Validated Testing Profiles
 
-Use these mock account profiles to test permissions segregation, financial summaries, and anomaly alert notifications:
+Use these mock account profiles to test privileges segregation, financial summaries, and anomaly alert notifications:
 
 | Account Identity Name | Sign-In Mock Email | Secure Default Password | Context Behavior Expected |
 | :--- | :--- | :--- | :--- |
-| **Alice Smith** | `alice.smith@example.com` | `password123` | Flags small anomalies (Movie Tickets) with `Z-Score >= 1.0`. |
-| **Ian Malcolm** | `ian.m@example.com` | `password123` | High overall net income. Flags structural utility spikes. |
-
----
-
-## 🛡️ Core Security Implementations
-
-* **OAuth2 Bearer Flow:** Tokens generated at `/auth/login` require validating an email string paired to a password hash context.
-* **Cross-Tenant Guard Rails:** Every request verified by the `get_current_user` dependency automatically asserts that `current_user.id == requested_customer_id`, preventing authenticated profiles from viewing other users' financial statements.
+| **Alice Smith** | `alice.smith@example.com` | `password123` | Flags small entertainment variations. Supports conversational multi-turn testing. |
+| **Ian Malcolm** | `ian.m@example.com` | `password123` | High overall net income. Flags structural utility/rent spikes. |

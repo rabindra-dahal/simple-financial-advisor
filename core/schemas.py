@@ -75,3 +75,9 @@ class Token(BaseModel):
 class TokenData(BaseModel):
     email: str | None = None
 
+
+class AdviceRequest(BaseModel):
+    query: str
+    session_id: str = "default_session"  # Tracks individual ongoing conversations
+
+
